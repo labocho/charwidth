@@ -1,4 +1,3 @@
-$LOAD_PATH << File.expand_path(File.dirname(__FILE__))
 module CharwidthNormalization
   autoload :String, "charwidth_normalization/string"
   autoload :Characters, "charwidth_normalization/characters"
