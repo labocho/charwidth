@@ -1,0 +1,4 @@
+--- 
+:include: ^(Rakefile|Gemfile|Capfile|Guardfile|.*\.rb)$
+:exclude: 
+:force: false

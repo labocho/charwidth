@@ -12,13 +12,15 @@ end
 require 'rake'
 
 require 'jeweler'
+require "#{File.dirname(__FILE__)}/lib/charwidth_normalization/version"
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
   gem.name = "charwidth_normalization"
+  gem.version = CharwidthNormalization::Version::STRING
   gem.homepage = "http://github.com/labocho/charwidth_normalization"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{Normalize Japanese/Korean FULL-WIDTH and HALF-WIDTH charcters}
+  gem.description = %Q{Normalize Japanese/Korean FULL-WIDTH and HALF-WIDTH charcters}
   gem.email = "labocho@penguinlab.jp"
   gem.authors = ["labocho"]
   # dependencies defined in Gemfile
