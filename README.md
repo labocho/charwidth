@@ -1,26 +1,26 @@
-# charwidth_normalization
+# charwidth
 
-charwidth_normalization is library to normalize Unicode fullwidth / halfwidth (zenkaku / hankaku) characters for Ruby.
+charwidth is library to normalize Unicode fullwidth / halfwidth (zenkaku / hankaku) characters for Ruby.
 
 # Installation
 
-    gem install charwidth_normalization
+    gem install charwidth
 
 # Usage
 
-    require "charwidth_normalization"
-    CharwidthNormalization.normalize("Ｈｅｌｌｏ，　Ｗｏｒｌｄ！") # => "Hello, World!"
-    CharwidthNormalization.normalize!("Ｈｅｌｌｏ，　Ｗｏｒｌｄ！") # destructive
-    CharwidthNormalization.normalize("｢ﾊﾛｰﾜｰﾙﾄﾞ｣") # => "「ハローワールド」"
+    require "charwidth"
+    Charwidth.normalize("Ｈｅｌｌｏ，　Ｗｏｒｌｄ！") # => "Hello, World!"
+    Charwidth.normalize!("Ｈｅｌｌｏ，　Ｗｏｒｌｄ！") # destructive
+    Charwidth.normalize("｢ﾊﾛｰﾜｰﾙﾄﾞ｣") # => "「ハローワールド」"
 
 Or extend String class.
 
-    require "charwidth_normalization/string"
+    require "charwidth/string"
     "Ｈｅｌｌｏ，　Ｗｏｒｌｄ！".normalize_charwidth # => "Hello, World!"
     "Ｈｅｌｌｏ，　Ｗｏｒｌｄ！".normalize_charwidth! # => destructive
     "｢ﾊﾛｰﾜｰﾙﾄﾞ｣".normalize_charwidth # => "「ハローワールド」"
     
-# Contributing to charwidth_normalization
+# Contributing to charwidth
  
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it

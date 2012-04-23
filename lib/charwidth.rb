@@ -1,7 +1,7 @@
-module CharwidthNormalization
-  autoload :String, "charwidth_normalization/string"
-  autoload :Characters, "charwidth_normalization/characters"
-  autoload :Version, "charwidth_normalization/version"
+module Charwidth
+  autoload :String, "charwidth/string"
+  autoload :Characters, "charwidth/characters"
+  autoload :Version, "charwidth/version"
 
   module ClassMethods
     # Normalize Unicode fullwidth / halfwidth (zenkaku / hankaku) characters
@@ -20,7 +20,10 @@ module CharwidthNormalization
     end
 
     private
-    TYPES = [:ascii, :white_parenthesis, :cjk_punctuation, :katakana, :space].freeze
+    TYPES = [
+      :ascii, :white_parenthesis, :cjk_punctuation, :katakana, :hangul,
+      :latin_1_punctuation_and_symbols, :mathematical_symbols, :space
+    ].freeze
     def normalize_charwidth!(src, options = {})
       types = TYPES.dup
 
@@ -58,6 +61,15 @@ module CharwidthNormalization
         when :katakana
           before << Characters::HALFWIDTH_KATAKANA_VARIANTS
           after << Characters::KATAKANA
+        when :hangul
+          before << Characters::HALFWIDTH_HANGUL_VARIANTS
+          after << Characters::HANGUL
+        when :latin_1_punctuation_and_symbols
+          before << Characters::FULLWIDTH_SYMBOL_VARIANTS
+          after << Characters::LATIN_1_PUNCTUATION_AND_SYMBOLS
+        when :mathematical_symbols
+          before << Characters::HALFWIDTH_SYMBOL_VARIANTS
+          after << Characters::MATHEMATICAL_SYMBOLS
         when :space
           before << Characters::IDEOGRAPHIC_SPACE
           after << Characters::SPACE

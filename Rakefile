@@ -12,15 +12,15 @@ end
 require 'rake'
 
 require 'jeweler'
-require "#{File.dirname(__FILE__)}/lib/charwidth_normalization/version"
+require "#{File.dirname(__FILE__)}/lib/charwidth/version"
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
-  gem.name = "charwidth_normalization"
-  gem.version = CharwidthNormalization::Version::STRING
-  gem.homepage = "http://github.com/labocho/charwidth_normalization"
+  gem.name = "charwidth"
+  gem.version = Charwidth::Version::STRING
+  gem.homepage = "http://github.com/labocho/charwidth"
   gem.license = "MIT"
-  gem.summary = %Q{Normalize Japanese/Korean FULL-WIDTH and HALF-WIDTH charcters}
-  gem.description = %Q{Normalize Japanese/Korean FULL-WIDTH and HALF-WIDTH charcters}
+  gem.summary = %Q{Normalize Japanese / Korean fullwidth (zenkaku) and halfwidth (hankaku) characters}
+  gem.description = %Q{Normalize Japanese / Korean fullwidth (zenkaku) and halfwidth (hankaku) characters}
   gem.email = "labocho@penguinlab.jp"
   gem.authors = ["labocho"]
   # dependencies defined in Gemfile
@@ -45,7 +45,7 @@ Rake::RDocTask.new do |rdoc|
   version = File.exist?('VERSION') ? File.read('VERSION') : ""
 
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "charwidth_normalization #{version}"
+  rdoc.title = "charwidth #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end

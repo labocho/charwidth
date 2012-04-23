@@ -1,10 +1,19 @@
-module CharwidthNormalization
+module Charwidth
   module Characters
     # http://www.unicode.org/charts/PDF/UFF00.pdf
     FULLWIDTH_ASCII_VARIANTS = (0xff01..0xff5e).to_a.pack("U*").freeze
     FULLWIDTH_BRACKETS = [0xff5f, 0xff60].pack("U*").freeze
     HALFWIDTH_CJK_PUCTUATION = (0xff61..0xff64).to_a.pack("U*").freeze
     HALFWIDTH_KATAKANA_VARIANTS = (0xff65..0xff9f).to_a.pack("U*").freeze
+    HALFWIDTH_HANGUL_VARIANTS = [
+      (0xffa0..0xffbe).to_a,
+      (0xffc2..0xffc7).to_a,
+      (0xffca..0xffcf).to_a,
+      (0xffd2..0xffd7).to_a,
+      (0xffda..0xffdc).to_a
+    ].flatten.pack("U*").freeze
+    FULLWIDTH_SYMBOL_VARIANTS = (0xffe0..0xffe6).to_a.pack("U*").freeze
+    HALFWIDTH_SYMBOL_VARIANTS = (0xffe8..0xffee).to_a.pack("U*").freeze
     IDEOGRAPHIC_SPACE = "\u3000".freeze
 
     ASCII_PUNCTUATION_AND_SYMBOLS = (0x0021..0x007e).to_a.pack("U*").freeze
@@ -26,6 +35,25 @@ module CharwidthNormalization
       0x30ef, 0x30f3, # KATAKANA LETTER WA, N
       0x3099, # KATAKANA VOICED SOUND MARK
       0x309a, # KATAKANA SEMI-VOICED SOUND MARK
+    ].flatten.pack("U*").freeze
+    HANGUL = [
+      0x3164, # HANGUL FILLER
+      (0x3131..0x3163).to_a # HANGUL LETTER KIYEOK to I
+    ].flatten.pack("U*").freeze
+    LATIN_1_PUNCTUATION_AND_SYMBOLS = [
+      0x00a2, # CENT SIGN
+      0x00a3, # POUND SIGN
+      0x00ac, # NOT SIGN
+      0x00af, # MACRON
+      0x00a6, # BROKEN BAR
+      0x00a5, # YEN SIGN
+      0x20a9  # WON SIGN
+    ].pack("U*").freeze
+    MATHEMATICAL_SYMBOLS = [
+      0x2502, # BOX DRAWINGS LIGHT VERTICAL
+      (0x2190..0x2193).to_a, # LEFTWARDS, UPWARDS, RIGHTWARDS, DOWNWARDS ARROW
+      0x25a0, # BLACK SQUARE
+      0x25cb  # WHITE CIRCLE
     ].flatten.pack("U*").freeze
     SPACE = "\u0020".freeze
 
