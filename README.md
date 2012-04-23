@@ -1,6 +1,6 @@
 # charwidth
 
-charwidth is library to normalize Unicode fullwidth / halfwidth (zenkaku / hankaku) characters for Ruby.
+Normalize Unicode fullwidth / halfwidth (zenkaku / hankaku) characters.
 
 # Installation
 
