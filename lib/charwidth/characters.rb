@@ -26,7 +26,8 @@ module Charwidth
       0x30e3, 0x30e5, 0x30e7, 0x30c3, # KATAKANA LETTER SMALL YA, YU, YO, TU
       0x30fc, # KATAKANA-HIRAGANA PROLONGED SOUND MARK
       0x30a2.step(0x30aa, 2).to_a, # KATAKANA LETTER A to O
-      0x30ab.step(0x30c8, 2).to_a, # KATAKANA LETTER KA to TO
+      0x30ab.step(0x30bd, 2).to_a, # KATAKANA LETTER KA to SO
+      0x30bf, 0x30c1, 0x30c4, 0x30c6, 0x30c8, # KATAKANA LETTER TA to TO
       (0x30ca..0x30ce).to_a, # KATAKANA LETTER NA to NO
       0x30cf.step(0x30db, 3).to_a, # KATAKANA LETTER HA to HO
       (0x30de..0x30e2).to_a, # KATAKANA LETTER MA to MO

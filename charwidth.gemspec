@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "charwidth"
-  s.version = "0.1.0"
+  s.version = "0.1.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["labocho"]
-  s.date = "2012-04-23"
+  s.date = "2012-08-21"
   s.description = "Normalize Japanese / Korean fullwidth (zenkaku) and halfwidth (hankaku) characters"
   s.email = "labocho@penguinlab.jp"
   s.extra_rdoc_files = [
@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
     "LICENSE.txt",
     "README.md",
     "Rakefile",
+    "charwidth.gemspec",
     "lib/charwidth.rb",
     "lib/charwidth/characters.rb",
     "lib/charwidth/string.rb",
@@ -35,7 +36,7 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/labocho/charwidth"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.17"
+  s.rubygems_version = "1.8.23"
   s.summary = "Normalize Japanese / Korean fullwidth (zenkaku) and halfwidth (hankaku) characters"
 
   if s.respond_to? :specification_version then

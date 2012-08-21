@@ -27,7 +27,9 @@ describe "Charwidth" do
 
   it "should convert half-width katakana to full-width" do
     Charwidth.normalize("ｱｶｻﾀﾅﾊﾏﾔﾗﾜｦﾝｧｬｯｰ･").should == "アカサタナハマヤラワヲンァャッー・"
+    Charwidth.normalize("ﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉ").should == "タチツテトナニヌネノ"
   end
+
   it "should unify half-width (semi) voiced katakana with dakuon to full-width" do
     Charwidth.normalize("ｶﾞｻﾞﾀﾞﾊﾞﾊﾟ").should == "ガザダバパ"
   end
