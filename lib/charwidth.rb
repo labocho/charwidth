@@ -1,7 +1,8 @@
+require "charwidth/version"
+
 module Charwidth
   autoload :String, "charwidth/string"
   autoload :Characters, "charwidth/characters"
-  autoload :Version, "charwidth/version"
 
   module ClassMethods
     # Normalize Unicode fullwidth / halfwidth (zenkaku / hankaku) characters
