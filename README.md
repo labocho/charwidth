@@ -31,6 +31,27 @@ Or extend String class.
     "Ｈｅｌｌｏ，　Ｗｏｒｌｄ！".normalize_charwidth! # => destructive
     "｢ﾊﾛｰﾜｰﾙﾄﾞ｣".normalize_charwidth # => "「ハローワールド」"
 
+# ActiveRecord integration
+
+Write `require "charwidth/active_record"` to normalize all values of ActiveRecord attributes.
+
+    require "charwidth/active_record"
+
+    class Article < ActiveRecord::Base
+    end
+
+    a = Article.new(title: "Ｈｅｌｌｏ，　Ｗｏｒｌｄ！")
+    a.title # => "Hello, World!"
+
+# CLI
+
+    # Call charwidth command with arguments
+    $ charwidth "Ｈｅｌｌｏ，　Ｗｏｒｌｄ！"
+    Hello, World!
+    # Or as STDIN
+    $ echo "Ｈｅｌｌｏ，　Ｗｏｒｌｄ！" | charwidth
+    Hello, World!
+
 ## Contributing
 
 1. Fork it
