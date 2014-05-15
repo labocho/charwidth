@@ -6,7 +6,7 @@ Normalize Unicode fullwidth / halfwidth (zenkaku / hankaku) characters.
 
 Add this line to your application's Gemfile:
 
-    gem 'charwidth_template'
+    gem 'charwidth'
 
 
 And then execute:
@@ -15,7 +15,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install charwidth_template
+    $ gem install charwidth
 
 # Usage
 
