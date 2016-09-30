@@ -12,8 +12,7 @@ module Charwidth
     def self.included(base)
       base.class_eval do
         include InstanceMethods
-        alias_method :write_attribute_without_normalize_charwidth, :write_attribute
-        alias_method :write_attribute, :write_attribute_with_normalize_charwidth
+        alias_method_chain :write_attribute, :normalize_charwidth
       end
     end
   end
