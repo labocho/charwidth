@@ -56,6 +56,24 @@ module Charwidth
       normalize_charwidth!(string, options)
     end
 
+    def to_full_width(string)
+      to_full_width!(string.dup)
+    end
+
+    def to_full_width!(src)
+      unify_voiced_katakana!(src)
+
+      before, after = "", ""
+      HALFWIDTH_TO_FULLWIDTH.each_value do |half, full|
+        before << half
+        after << full
+      end
+
+      escape_for_tr!(before)
+      escape_for_tr!(after)
+      src.tr!(before, after) || src
+    end
+
     private
     TYPES = [
       :ascii, :white_parenthesis, :cjk_punctuation, :katakana, :hangul,
@@ -101,7 +119,8 @@ module Charwidth
         end
       end
 
-      after.sub!('\\', '\\\\\\\\') # escape for tr
+      escape_for_tr!(before)
+      escape_for_tr!(after)
       src.tr!(before, after) || src
     end
 
@@ -116,6 +135,15 @@ module Charwidth
       halfwidth.zip(fullwidth).inject(src) do |str, (h, f)|
         str.gsub!(h, f) || str
       end
+    end
+
+    def escape_for_tr!(s)
+      s.gsub!('\\', '\\\\')
+      s.gsub!('-', '\\-')
+      s.gsub!('^', '\\^')
+      s.gsub!('[', '\\[')
+      s.gsub!(']', '\\]')
+      s
     end
   end
 
