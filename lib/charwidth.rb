@@ -6,6 +6,41 @@ module Charwidth
   autoload :CLI, "charwidth/cli"
 
   module ClassMethods
+    HALFWIDTH_TO_FULLWIDTH = {
+      ascii: [
+        Characters::ASCII_PUNCTUATION_AND_SYMBOLS,
+        Characters::FULLWIDTH_ASCII_VARIANTS,
+      ],
+      white_parenthesis: [
+        Characters::WHITE_PARENTHESIS,
+        Characters::FULLWIDTH_BRACKETS,
+      ],
+      cjk_punctuation: [
+        Characters::HALFWIDTH_CJK_PUCTUATION,
+        Characters::CJK_SYMBOLS_AND_PUNCTUATION,
+      ],
+      katakana: [
+        Characters::HALFWIDTH_KATAKANA_VARIANTS,
+        Characters::KATAKANA,
+      ],
+      hangul: [
+        Characters::HALFWIDTH_HANGUL_VARIANTS,
+        Characters::HANGUL,
+      ],
+      latin_1_punctuation_and_symbols: [
+        Characters::LATIN_1_PUNCTUATION_AND_SYMBOLS,
+        Characters::FULLWIDTH_SYMBOL_VARIANTS,
+      ],
+      mathematical_symbols: [
+        Characters::HALFWIDTH_SYMBOL_VARIANTS,
+        Characters::MATHEMATICAL_SYMBOLS,
+      ],
+      space: [
+        Characters::SPACE,
+        Characters::IDEOGRAPHIC_SPACE,
+      ],
+    }
+
     # Normalize Unicode fullwidth / halfwidth (zenkaku / hankaku) characters
     # options: {
     #   only: [:ascii, :white_parenthesis, :cjk_punctuation, :katakana, :space],
@@ -51,30 +86,18 @@ module Charwidth
       before, after = "", ""
       types.each do |type|
         case type
-        when :ascii
-          before << Characters::FULLWIDTH_ASCII_VARIANTS
-          after << Characters::ASCII_PUNCTUATION_AND_SYMBOLS
-        when :white_parenthesis
-          before << Characters::FULLWIDTH_BRACKETS
-          after << Characters::WHITE_PARENTHESIS
-        when :cjk_punctuation
-          before << Characters::HALFWIDTH_CJK_PUCTUATION
-          after << Characters::CJK_SYMBOLS_AND_PUNCTUATION
-        when :katakana
-          before << Characters::HALFWIDTH_KATAKANA_VARIANTS
-          after << Characters::KATAKANA
-        when :hangul
-          before << Characters::HALFWIDTH_HANGUL_VARIANTS
-          after << Characters::HANGUL
-        when :latin_1_punctuation_and_symbols
-          before << Characters::FULLWIDTH_SYMBOL_VARIANTS
-          after << Characters::LATIN_1_PUNCTUATION_AND_SYMBOLS
-        when :mathematical_symbols
-          before << Characters::HALFWIDTH_SYMBOL_VARIANTS
-          after << Characters::MATHEMATICAL_SYMBOLS
-        when :space
-          before << Characters::IDEOGRAPHIC_SPACE
-          after << Characters::SPACE
+        when :ascii, :white_parenthesis, :latin_1_punctuation_and_symbols, :space
+          # convert fullwidth to halfwidth
+          HALFWIDTH_TO_FULLWIDTH[type].tap{|half, full|
+            before << full
+            after << half
+          }
+        when :cjk_punctuation, :katakana, :hangul, :mathematical_symbols
+          # convert halfwidth to fullwidth
+          HALFWIDTH_TO_FULLWIDTH[type].tap{|half, full|
+            before << half
+            after << full
+          }
         end
       end
 
