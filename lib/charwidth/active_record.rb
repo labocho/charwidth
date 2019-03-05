@@ -12,8 +12,13 @@ module Charwidth
     def self.included(base)
       base.class_eval do
         include InstanceMethods
-        alias_method :write_attribute_without_normalize_charwidth, :write_attribute
-        alias_method :write_attribute, :write_attribute_with_normalize_charwidth
+        if ::ActiveRecord.version<Gem::Version.new("5.2")
+          alias_method :write_attribute_without_normalize_charwidth, :write_attribute
+          alias_method :write_attribute, :write_attribute_with_normalize_charwidth
+        else
+          alias_method :write_attribute_without_normalize_charwidth, :_write_attribute
+          alias_method :_write_attribute, :write_attribute_with_normalize_charwidth
+        end
       end
     end
   end

@@ -1,3 +1,7 @@
+### v0.1.5
+
+- Fix active_record.rb to follow the change of AR after 5.2.
+
 ### v0.1.4
 
 - Add Charwidth.to_full_width
