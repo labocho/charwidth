@@ -1,22 +1,22 @@
 # encoding: UTF-8
 require "spec_helper"
-require "active_record"
-require "charwidth/active_record"
+require "active_model"
+require "charwidth/active_model"
 
-describe Charwidth::ActiveRecord do
+describe Charwidth::ActiveModel do
   before(:all) do
-    ActiveRecord::Base.establish_connection(
-      adapter: "sqlite3",
-      database: ":memory:"
-    )
-    ActiveRecord::Base.connection.execute <<-SQL
-      CREATE TABLE users (
-        id integer PRIMARY KEY AUTOINCREMENT,
-        name text NOT NULL
-      )
-    SQL
+    class User
+      include ActiveModel::Attributes
+      include Charwidth::ActiveModel
 
-    class User < ActiveRecord::Base; end
+      attribute :name, :string
+      normalize_charwidth :name
+
+      def initialize(name: nil)
+        super()
+        self.name = name
+      end
+    end
   end
 
   subject { User.new }

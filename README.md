@@ -31,13 +31,19 @@ Or extend String class.
     "Ｈｅｌｌｏ，　Ｗｏｒｌｄ！".normalize_charwidth! # => destructive
     "｢ﾊﾛｰﾜｰﾙﾄﾞ｣".normalize_charwidth # => "「ハローワールド」"
 
-# ActiveRecord integration
+# Rails integration
 
-Write `require "charwidth/active_record"` to normalize all values of ActiveRecord attributes.
+Add lines below to `app/models/application_record.rb`.
 
-    require "charwidth/active_record"
+    require "charwidth/active_model"
+    class ApplicationRecord < ActiveRecord::Base
+      include Charwidth::ActiveModel
+    end
+
+And call `normalize_charwidth` class method in model class.
 
     class Article < ActiveRecord::Base
+      normalize_charwidth :title, :body
     end
 
     a = Article.new(title: "Ｈｅｌｌｏ，　Ｗｏｒｌｄ！")
