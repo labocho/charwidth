@@ -39,7 +39,7 @@ module Charwidth
         Characters::SPACE,
         Characters::IDEOGRAPHIC_SPACE,
       ],
-    }
+    }.transform_values(&:freeze).freeze
 
     # Normalize Unicode fullwidth / halfwidth (zenkaku / hankaku) characters
     # options: {
@@ -63,7 +63,8 @@ module Charwidth
     def to_full_width!(src)
       unify_voiced_katakana!(src)
 
-      before, after = "", ""
+      before = ""
+      after = ""
       HALFWIDTH_TO_FULLWIDTH.each_value do |half, full|
         before << half
         after << full
@@ -77,7 +78,7 @@ module Charwidth
     private
     TYPES = [
       :ascii, :white_parenthesis, :cjk_punctuation, :katakana, :hangul,
-      :latin_1_punctuation_and_symbols, :mathematical_symbols, :space
+      :latin_1_punctuation_and_symbols, :mathematical_symbols, :space,
     ].freeze
     def normalize_charwidth!(src, options = {})
       types = TYPES.dup
@@ -91,28 +92,31 @@ module Charwidth
         unless (unexpected_types = options[:only] - TYPES).empty?
           raise "Unexpected normalize type(s): #{unexpected_types.inspect}"
         end
-        types = types & options[:only]
+
+        types &= options[:only]
       end
 
       if options[:expect]
         unless (unexpected_types = options[:expected] - TYPES).empty?
-          raise "Unexpected normalize type(s): #{t.inspect}"
+          raise "Unexpected normalize type(s): #{unexpected_types.inspect}"
         end
-        types = types - options[:expect]
+
+        types -= options[:expect]
       end
 
-      before, after = "", ""
+      before = ""
+      after = ""
       types.each do |type|
         case type
         when :ascii, :white_parenthesis, :latin_1_punctuation_and_symbols, :space
           # convert fullwidth to halfwidth
-          HALFWIDTH_TO_FULLWIDTH[type].tap{|half, full|
+          HALFWIDTH_TO_FULLWIDTH[type].tap {|half, full|
             before << full
             after << half
           }
         when :cjk_punctuation, :katakana, :hangul, :mathematical_symbols
           # convert halfwidth to fullwidth
-          HALFWIDTH_TO_FULLWIDTH[type].tap{|half, full|
+          HALFWIDTH_TO_FULLWIDTH[type].tap {|half, full|
             before << half
             after << full
           }
@@ -139,10 +143,10 @@ module Charwidth
 
     def escape_for_tr!(s)
       s.gsub!('\\', '\\\\')
-      s.gsub!('-', '\\-')
-      s.gsub!('^', '\\^')
-      s.gsub!('[', '\\[')
-      s.gsub!(']', '\\]')
+      s.gsub!("-", '\\-')
+      s.gsub!("^", '\\^')
+      s.gsub!("[", '\\[')
+      s.gsub!("]", '\\]')
       s
     end
   end

@@ -10,7 +10,7 @@ module Charwidth
       (0xffc2..0xffc7).to_a,
       (0xffca..0xffcf).to_a,
       (0xffd2..0xffd7).to_a,
-      (0xffda..0xffdc).to_a
+      (0xffda..0xffdc).to_a,
     ].flatten.pack("U*").freeze
     FULLWIDTH_SYMBOL_VARIANTS = (0xffe0..0xffe6).to_a.pack("U*").freeze
     HALFWIDTH_SYMBOL_VARIANTS = (0xffe8..0xffee).to_a.pack("U*").freeze
@@ -39,7 +39,7 @@ module Charwidth
     ].flatten.pack("U*").freeze
     HANGUL = [
       0x3164, # HANGUL FILLER
-      (0x3131..0x3163).to_a # HANGUL LETTER KIYEOK to I
+      (0x3131..0x3163).to_a, # HANGUL LETTER KIYEOK to I
     ].flatten.pack("U*").freeze
     LATIN_1_PUNCTUATION_AND_SYMBOLS = [
       0x00a2, # CENT SIGN
@@ -48,33 +48,33 @@ module Charwidth
       0x00af, # MACRON
       0x00a6, # BROKEN BAR
       0x00a5, # YEN SIGN
-      0x20a9  # WON SIGN
+      0x20a9, # WON SIGN
     ].pack("U*").freeze
     MATHEMATICAL_SYMBOLS = [
       0x2502, # BOX DRAWINGS LIGHT VERTICAL
       (0x2190..0x2193).to_a, # LEFTWARDS, UPWARDS, RIGHTWARDS, DOWNWARDS ARROW
       0x25a0, # BLACK SQUARE
-      0x25cb  # WHITE CIRCLE
+      0x25cb, # WHITE CIRCLE
     ].flatten.pack("U*").freeze
     SPACE = "\u0020".freeze
 
-    HALFWIDTH_KATAKANA_VOICED_SOUND_MARK = "\uff9e"
+    HALFWIDTH_KATAKANA_VOICED_SOUND_MARK = "\uff9e".freeze
     HALFWIDTH_VOICED_KATAKANA = [
       (0xff76..0xff84).to_a, # HALFWIDTH KATAKANA LETTER KA to TO
       (0xff8a..0xff8e).to_a, # HALFWIDTH KATAKANA LETTER HA to HO
-      0xff73 # HALFWIDTH KATAKANA LETTER U
-    ].flatten.map{|k| ([k].pack("U") + HALFWIDTH_KATAKANA_VOICED_SOUND_MARK).freeze }.freeze
+      0xff73, # HALFWIDTH KATAKANA LETTER U
+    ].flatten.map {|k| ([k].pack("U") + HALFWIDTH_KATAKANA_VOICED_SOUND_MARK).freeze }.freeze
     VOICED_KATAKANA = [
       0x30ac.step(0x30be, 2).to_a, # KATAKANA LETTER GA to ZO
       [0x30c0, 0x30c2, 0x30c5, 0x30c7, 0x30c9], # KATAKANA LETTER DA to DO
       0x30d0.step(0x30dc, 3).to_a, # KATAKANA LETTER BA to BO
-      0x30f4 # KATAKANA LETTER VU
-    ].flatten.map{|c| [c].pack("U").freeze }.freeze
+      0x30f4, # KATAKANA LETTER VU
+    ].flatten.map {|c| [c].pack("U").freeze }.freeze
 
-    HALFWIDTH_KATAKANA_SEMI_VOICED_SOUND_MARK = "\uff9f"
+    HALFWIDTH_KATAKANA_SEMI_VOICED_SOUND_MARK = "\uff9f".freeze
     HALFWIDTH_SEMI_VOICED_KATAKANA = [
-      (0xff8a..0xff8e).to_a # HALFWIDTH KATAKANA LETTER HA to HO
-    ].flatten.map{|k| ([k].pack("U") + HALFWIDTH_KATAKANA_SEMI_VOICED_SOUND_MARK).freeze }.freeze
-    SEMI_VOICED_KATAKANA = 0x30d1.step(0x30dd, 3).map{|c| [c].pack("U").freeze }.flatten.freeze # KATAKANA LETTER PA to PO
+      (0xff8a..0xff8e).to_a, # HALFWIDTH KATAKANA LETTER HA to HO
+    ].flatten.map {|k| ([k].pack("U") + HALFWIDTH_KATAKANA_SEMI_VOICED_SOUND_MARK).freeze }.freeze
+    SEMI_VOICED_KATAKANA = 0x30d1.step(0x30dd, 3).map {|c| [c].pack("U").freeze }.flatten.freeze # KATAKANA LETTER PA to PO
   end
 end
