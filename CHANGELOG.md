@@ -1,3 +1,11 @@
+### v0.2.1
+
+- Exclude dependency executables (rspec, rubocop). (Thank you @ta1kt0me for reporting an issue)
+
+### v0.2.0
+
+- Add `normalize_charwidth` method instead of problematic ActiveRecord integration.
+
 ### v0.1.5
 
 - Fix active_record.rb to follow the change of AR after 5.2.
